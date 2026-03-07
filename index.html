@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xiaoyun Yin — Human Systems Engineering Researcher</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FDFBF7;
+    --bg-alt: #F5F0E8;
+    --ink: #1A1A1A;
+    --ink-light: #5C5C5C;
+    --ink-muted: #8A8A8A;
+    --accent: #8B3A3A;
+    --accent-light: #C45C5C;
+    --accent-bg: #F9EFEF;
+    --border: #E0D8CC;
+    --border-light: #EDE8DE;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+    --max-w: 920px;
+    --gutter: clamp(1.5rem, 5vw, 4rem);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--accent-bg); color: var(--accent); }
+
+  /* ── NAVIGATION ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(253, 251, 247, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-light);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 1px 20px rgba(0,0,0,0.06); }
+  .nav-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  .nav-brand {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--ink-light);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    position: relative;
+    transition: color 0.2s;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0;
+    width: 0; height: 1.5px;
+    background: var(--accent);
+    transition: width 0.25s ease;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+  .nav-links a.active { color: var(--accent); }
+
+  .hamburger {
+    display: none; background: none; border: none; cursor: pointer;
+    width: 28px; height: 20px; position: relative;
+  }
+  .hamburger span {
+    display: block; width: 100%; height: 2px; background: var(--ink);
+    position: absolute; left: 0; transition: all 0.3s;
+  }
+  .hamburger span:nth-child(1) { top: 0; }
+  .hamburger span:nth-child(2) { top: 9px; }
+  .hamburger span:nth-child(3) { top: 18px; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 140px var(--gutter) 80px;
+    max-width: var(--max-w);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 80px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(139,58,58,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.2s forwards;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    opacity: 0;
+    animation: fadeUp 0.6s 0.35s forwards;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--ink-light);
+    max-width: 560px;
+    line-height: 1.75;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.5s forwards;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.65s forwards;
+  }
+  .hero-meta a, .hero-meta span {
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: color 0.2s;
+  }
+  .hero-meta a:hover { color: var(--accent); }
+  .hero-meta svg { width: 16px; height: 16px; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 60px var(--gutter) 70px;
+  }
+  .section + .section { border-top: 1px solid var(--border-light); }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+  }
+  .section h2 {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── RESEARCH INTERESTS ── */
+  .interests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.2rem;
+  }
+  .interest-card {
+    background: var(--bg-alt);
+    border: 1px solid var(--border-light);
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: border-color 0.3s, transform 0.2s;
+  }
+  .interest-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .interest-card h3 {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+  .interest-card p {
+    font-size: 0.88rem;
+    color: var(--ink-light);
+    line-height: 1.6;
+  }
+
+  /* ── PUBLICATIONS ── */
+  .pub-list { list-style: none; }
+  .pub-item {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border-light);
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+  .pub-item:last-child { border-bottom: none; }
+  .pub-year {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    padding-top: 3px;
+  }
+  .pub-title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+  .pub-authors {
+    font-size: 0.83rem;
+    color: var(--ink-light);
+    line-height: 1.55;
+  }
+  .pub-authors strong { color: var(--ink); font-weight: 600; }
+  .pub-venue {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--ink-muted);
+    margin-top: 0.2rem;
+  }
+  .pub-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: var(--accent-bg);
+    color: var(--accent);
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 0.4rem;
+  }
+
+  /* ── EDUCATION & EXPERIENCE (timeline) ── */
+  .timeline { list-style: none; position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 24px; top: 8px; bottom: 8px;
+    width: 1.5px;
+    background: var(--border);
+  }
+  .tl-item {
+    position: relative;
+    padding: 0 0 2rem 56px;
+  }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-dot {
+    position: absolute;
+    left: 18px; top: 6px;
+    width: 13px; height: 13px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2.5px solid var(--accent);
+  }
+  .tl-date {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.25rem;
+  }
+  .tl-title {
+    font-family: var(--serif);
+    font-size: 1.12rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+  .tl-sub {
+    font-size: 0.88rem;
+    color: var(--ink-light);
+    margin-top: 0.15rem;
+  }
+  .tl-detail {
+    font-size: 0.85rem;
+    color: var(--ink-light);
+    margin-top: 0.5rem;
+    line-height: 1.65;
+  }
+
+  /* ── NEWS ── */
+  .news-list { list-style: none; }
+  .news-item {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-light);
+    align-items: baseline;
+  }
+  .news-item:last-child { border-bottom: none; }
+  .news-date {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    white-space: nowrap;
+  }
+  .news-content {
+    font-size: 0.92rem;
+    color: var(--ink-light);
+    line-height: 1.6;
+  }
+  .news-content em { color: var(--ink); }
+  .news-badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-right: 0.4rem;
+    vertical-align: 1px;
+  }
+  .news-badge.new {
+    background: var(--accent-bg);
+    color: var(--accent);
+  }
+
+  /* ── BLOG ── */
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .blog-card {
+    border: 1px solid var(--border-light);
+    border-radius: 10px;
+    padding: 1.8rem;
+    background: var(--bg);
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .blog-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .blog-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 8px 30px rgba(139,58,58,0.08);
+    transform: translateY(-3px);
+  }
+  .blog-card:hover::before { opacity: 1; }
+  .blog-tag {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+  .blog-card h3 {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .blog-card p {
+    font-size: 0.85rem;
+    color: var(--ink-light);
+    line-height: 1.6;
+  }
+  .blog-date {
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    margin-top: 1rem;
+    display: block;
+  }
+
+  /* ── CONTACT ── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background: var(--bg-alt);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: background 0.2s;
+  }
+  .contact-item:hover { background: var(--accent-bg); }
+  .contact-item svg { width: 20px; height: 20px; color: var(--accent); flex-shrink: 0; }
+  .contact-item .contact-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    font-family: var(--mono);
+  }
+  .contact-item .contact-val {
+    font-size: 0.9rem;
+    color: var(--ink);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 3rem var(--gutter);
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    border-top: 1px solid var(--border-light);
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 700px) {
+    .nav-links { display: none; }
+    .nav-links.open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 60px; left: 0; right: 0;
+      background: rgba(253,251,247,0.97);
+      backdrop-filter: blur(16px);
+      padding: 1.5rem var(--gutter);
+      gap: 1.2rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .hamburger { display: block; }
+    .pub-item { grid-template-columns: 1fr; }
+    .pub-year { margin-bottom: -0.5rem; }
+    .hero h1 { font-size: 2.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════ NAVIGATION ════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">X. Yin</a>
+    <button class="hamburger" id="menuBtn" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about" class="active">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#notebook">Notebook</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ════ HERO ════ -->
+<header class="hero" id="about">
+  <div>
+    <div class="hero-label">Ph.D. Candidate · Arizona State University</div>
+    <h1>Xiaoyun Yin</h1>
+    <h1 style="margin-top: -0.15em;">Human Systems <em>Engineering</em></h1>
+    <p class="hero-sub">
+      I study trust dynamics, team coordination, and resilient performance in 
+      human-autonomy teaming — particularly in distributed space operations. 
+      My work bridges agent-based modeling, neural network approaches, and 
+      empirical team research.
+    </p>
+    <div class="hero-meta">
+      <a href="mailto:xiaoyun.yin@asu.edu">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+        xiaoyun.yin@asu.edu
+      </a>
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
+        Phoenix, AZ
+      </span>
+      <a href="https://scholar.google.com" target="_blank" rel="noopener">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342" /></svg>
+        Google Scholar
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ════ RESEARCH INTERESTS ════ -->
+<section class="section" id="research">
+  <div class="section-label reveal">01 — Research</div>
+  <h2 class="reveal">Research Interests</h2>
+  <div class="interests-grid">
+    <div class="interest-card reveal">
+      <h3>Trust in Human-AI Teaming</h3>
+      <p>Modeling how trust and distrust spread dynamically in distributed human-autonomy teams, using recurrent neural networks and entropy-based approaches.</p>
+    </div>
+    <div class="interest-card reveal">
+      <h3>Distributed Space Operations</h3>
+      <p>Designing and evaluating scenarios for future space missions where humans and machines must coordinate across communication delays and constrained environments.</p>
+    </div>
+    <div class="interest-card reveal">
+      <h3>Agent-Based Modeling</h3>
+      <p>Using simulation to understand emergent coordination patterns in distributed teams, bridging computational models with empirical team cognition research.</p>
+    </div>
+    <div class="interest-card reveal">
+      <h3>Resilient Team Performance</h3>
+      <p>Observing and measuring how teams adapt under perturbation — particularly in high-stakes space-based missions using digital twin technologies.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════ PUBLICATIONS ════ -->
+<section class="section" id="publications">
+  <div class="section-label reveal">02 — Publications</div>
+  <h2 class="reveal">Selected Publications</h2>
+  <ul class="pub-list">
+
+    <li class="pub-item reveal">
+      <span class="pub-year">2025</span>
+      <div>
+        <div class="pub-title">Observing Resilient Performance in Space-Based Teaming Mission Using Digital Technologies</div>
+        <div class="pub-authors"><strong>Yin, X.</strong>, Grimm, D. A. P., Zhou, S., Pisors, J., Yang Teo, A. Z., Lijenstolpe, M., Doost, E. Z., Cooke, N. J., &amp; Gorman, J. C.</div>
+        <div class="pub-venue">Applied Ergonomics, 124, 104409</div>
+      </div>
+    </li>
+
+    <li class="pub-item reveal">
+      <span class="pub-year">2025</span>
+      <div>
+        <div class="pub-title">Trusting Autonomous Teammates in Human-AI Teams — A Literature Review</div>
+        <div class="pub-authors">Duan, W., Flathmann, C., McNeese, N., Scalia, M., Zhang, R., Gorman, J., Freeman, G., Zhou, S., Hauptman, A., &amp; <strong>Yin, X.</strong></div>
+        <div class="pub-venue">Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems</div>
+      </div>
+    </li>
+
+    <li class="pub-item reveal">
+      <span class="pub-year">2024</span>
+      <div>
+        <div class="pub-title">Distributed Space Team Coordination: An Agent-Based Modeling and Simulation Approach</div>
+        <div class="pub-authors"><strong>Yin, X.</strong>, Gorman, J. C.</div>
+        <div class="pub-venue">Proceedings of the HFES Annual Meeting</div>
+        <span class="pub-tag">In Press</span>
+      </div>
+    </li>
+
+    <li class="pub-item reveal">
+      <span class="pub-year">2024</span>
+      <div>
+        <div class="pub-title">Entropy and Trust Dynamics in Human-Autonomy Teaming</div>
+        <div class="pub-authors"><strong>Yin, X.</strong>, Gorman, J. C.</div>
+        <div class="pub-venue">Proceedings of the HFES Annual Meeting</div>
+        <span class="pub-tag">In Press</span>
+      </div>
+    </li>
+
+    <li class="pub-item reveal">
+      <span class="pub-year">2024</span>
+      <div>
+        <div class="pub-title">Predictive Dynamics of Trust in Human-Robot Interaction: A Recurrent Neural Network Approach</div>
+        <div class="pub-authors"><strong>Yin, X.</strong>, Zhou, S., Scalia, M. J., Zhang, R., &amp; Gorman, J. C.</div>
+        <div class="pub-venue">Proceedings of the HRI '24 Workshop, Boulder, CO</div>
+      </div>
+    </li>
+
+    <li class="pub-item reveal">
+      <span class="pub-year">2023</span>
+      <div>
+        <div class="pub-title">Establishing Human Observer Criterion in Evaluating Artificial Social Intelligence Agents in a Search and Rescue Task</div>
+        <div class="pub-authors">Huang, L., Freeman, J., Cooke, N. J., Cohen, M. C., <strong>Yin, X.</strong>, Clark, J., ... &amp; Colonna-Romano, J.</div>
+        <div class="pub-venue">Topics in Cognitive Science</div>
+      </div>
+    </li>
+
+    <li class="pub-item reveal">
+      <span class="pub-year">2023</span>
+      <div>
+        <div class="pub-title">Development of a Real-Time Trust/Distrust Metric Using Interactive Hybrid Cognitive Task Analysis</div>
+        <div class="pub-authors">Zhou, S., <strong>Yin, X.</strong>, Scalia, M. J., Zhang, R., Gorman, J. C., &amp; McNeese, N. J.</div>
+        <div class="pub-venue">Proceedings of the HFES Annual Meeting</div>
+      </div>
+    </li>
+
+    <li class="pub-item reveal">
+      <span class="pub-year">2022</span>
+      <div>
+        <div class="pub-title">Development of a Distributed Teaming Scenario for Future Space Operations</div>
+        <div class="pub-authors"><strong>Yin, X.</strong>, Clark, J., Johnson, C. J., Grimm, D. A., Zhou, S., Wong, M., Cauffman, S., Demir, M., Cooke, N. J., &amp; Gorman, J. C.</div>
+        <div class="pub-venue">Proceedings of the HFES Annual Meeting, 66(1), 788–792</div>
+      </div>
+    </li>
+
+  </ul>
+</section>
+
+<!-- ════ EDUCATION ════ -->
+<section class="section" id="education">
+  <div class="section-label reveal">03 — Education</div>
+  <h2 class="reveal">Education</h2>
+  <ul class="timeline">
+    <li class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2022 — Present</div>
+      <div class="tl-title">Ph.D. in Human Systems Engineering</div>
+      <div class="tl-sub">Arizona State University</div>
+    </li>
+    <li class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2020 — 2023</div>
+      <div class="tl-title">M.S. in Human Systems Engineering</div>
+      <div class="tl-sub">Arizona State University · Engineering Graduate Fellowship</div>
+    </li>
+    <li class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2015 — 2019</div>
+      <div class="tl-title">B.S. in Psychology &amp; B.S. in Sociology</div>
+      <div class="tl-sub">Arizona State University · Dean's List</div>
+    </li>
+  </ul>
+</section>
+
+<!-- ════ EXPERIENCE ════ -->
+<section class="section" id="experience">
+  <div class="section-label reveal">04 — Experience</div>
+  <h2 class="reveal">Research Experience</h2>
+  <ul class="timeline">
+    <li class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Aug 2023 — Present</div>
+      <div class="tl-title">Graduate Research Assistant — Systems Psychology Lab</div>
+      <div class="tl-sub">Supervisor: Jamie Gorman, Ph.D.</div>
+      <div class="tl-detail">Studying the spread of trust and distrust in distributed human-autonomy teaming constellations. Responsible for sIRB submissions, multi-institution collaboration, behavioral coding, and dynamic trust analysis using MATLAB.</div>
+    </li>
+    <li class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Jan 2021 — Present</div>
+      <div class="tl-title">Graduate Service Assistant — Ctr. Human, AI &amp; Robot Teaming</div>
+      <div class="tl-sub">Supervisor: Nancy Cooke, Ph.D. · AFOSR Space Challenge</div>
+      <div class="tl-detail">Identifying space human-machine teaming issues through SME interviews, implementing scenarios in distributed testbeds, identifying cognitive state sensors, and collecting demonstration data.</div>
+    </li>
+    <li class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Aug 2020 — Aug 2023</div>
+      <div class="tl-title">Graduate Service Assistant — DARPA ASIST Project</div>
+      <div class="tl-sub">Supervisor: Nancy Cooke, Ph.D.</div>
+      <div class="tl-detail">Developed a Minecraft-based testbed for remote urban search and rescue studies, contributed to mental model development through behavioral annotation, and curated long-term accessible research databases.</div>
+    </li>
+  </ul>
+
+  <h2 class="reveal" style="margin-top: 3rem;">Teaching</h2>
+  <ul class="timeline">
+    <li class="tl-item reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-date">2018 — 2020</div>
+      <div class="tl-title">Teaching Assistant &amp; Psychology Tutor</div>
+      <div class="tl-sub">Arizona State University</div>
+      <div class="tl-detail">TA for Introduction to Sociology and Modern Social Problems / Science, Technology &amp; Society. Tutored AP Psychology students in Mesa, AZ.</div>
+    </li>
+  </ul>
+</section>
+
+<!-- ════ NEWS ════ -->
+<section class="section" id="news">
+  <div class="section-label reveal">05 — News</div>
+  <h2 class="reveal">News &amp; Updates</h2>
+  <ul class="news-list">
+    <li class="news-item reveal">
+      <span class="news-date">Mar 2026</span>
+      <div class="news-content">
+        <span class="news-badge new">New</span>
+        Personal website is live! Excited to share my research and writing here.
+      </div>
+    </li>
+    <li class="news-item reveal">
+      <span class="news-date">2025</span>
+      <div class="news-content">
+        Paper accepted at <em>Applied Ergonomics</em> — "Observing Resilient Performance in Space-Based Teaming Mission Using Digital Technologies."
+      </div>
+    </li>
+    <li class="news-item reveal">
+      <span class="news-date">2025</span>
+      <div class="news-content">
+        Paper accepted at <em>CHI 2025</em> — "Trusting Autonomous Teammates in Human-AI Teams — A Literature Review."
+      </div>
+    </li>
+    <li class="news-item reveal">
+      <span class="news-date">2024</span>
+      <div class="news-content">
+        Received Google compute credits ($1,100) for concordia-contest.
+      </div>
+    </li>
+    <li class="news-item reveal">
+      <span class="news-date">2024</span>
+      <div class="news-content">
+        Two papers accepted at HFES Annual Meeting — on agent-based modeling for space team coordination and entropy-based trust dynamics.
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- ════ NOTEBOOK ════ -->
+<section class="section" id="notebook">
+  <div class="section-label reveal">06 — Notebook</div>
+  <h2 class="reveal">Notes &amp; Reflections</h2>
+  <p class="reveal" style="color: var(--ink-light); margin-bottom: 2rem; max-width: 540px;">
+    Notes on papers I'm reading, ideas about human-AI teaming, and reflections from the Ph.D. journey.
+  </p>
+  <div class="blog-grid">
+
+    <article class="blog-card reveal" onclick="">
+      <span class="blog-tag">Reading Notes</span>
+      <h3>On Measuring Trust as a Dynamic Process</h3>
+      <p>Reflections on how entropy-based metrics can capture trust fluctuations that static surveys miss — and what that means for real-time team assessment.</p>
+      <span class="blog-date">Coming soon</span>
+    </article>
+
+    <article class="blog-card reveal" onclick="">
+      <span class="blog-tag">Research Thoughts</span>
+      <h3>Why Agent-Based Models Matter for Team Science</h3>
+      <p>Thinking about when computational models illuminate things that empirical studies alone cannot, especially in distributed coordination.</p>
+      <span class="blog-date">Coming soon</span>
+    </article>
+
+    <article class="blog-card reveal" onclick="">
+      <span class="blog-tag">PhD Life</span>
+      <h3>Navigating Interdisciplinary Research</h3>
+      <p>Personal notes on working across psychology, engineering, and computer science — the challenges and unexpected rewards.</p>
+      <span class="blog-date">Coming soon</span>
+    </article>
+
+  </div>
+</section>
+
+<!-- ════ CONTACT ════ -->
+<section class="section" id="contact">
+  <div class="section-label reveal">07 — Contact</div>
+  <h2 class="reveal">Get in Touch</h2>
+  <p class="reveal" style="color: var(--ink-light); margin-bottom: 1.5rem;">
+    I'm on the faculty job market and always happy to discuss research collaborations or opportunities.
+  </p>
+  <div class="contact-grid reveal">
+    <a href="mailto:xiaoyun.yin@asu.edu" class="contact-item">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+      <div>
+        <div class="contact-label">Email</div>
+        <div class="contact-val">xiaoyun.yin@asu.edu</div>
+      </div>
+    </a>
+    <a href="tel:+16029107546" class="contact-item">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
+      <div>
+        <div class="contact-label">Phone</div>
+        <div class="contact-val">(602) 910-7546</div>
+      </div>
+    </a>
+    <div class="contact-item">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
+      <div>
+        <div class="contact-label">Location</div>
+        <div class="contact-val">Phoenix, AZ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  &copy; 2026 Xiaoyun Yin
+</footer>
+
+<script>
+// ── Nav scroll effect
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// ── Mobile menu
+const menuBtn = document.getElementById('menuBtn');
+const navLinks = document.getElementById('navLinks');
+menuBtn.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});
+
+// ── Active nav link on scroll
+const sections = document.querySelectorAll('.section, .hero');
+const links = document.querySelectorAll('.nav-links a');
+const observer1 = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      links.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector(`.nav-links a[href="#${id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+sections.forEach(s => { if (s.id) observer1.observe(s); });
+
+// ── Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer2 = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer2.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(el => observer2.observe(el));
+
+// ── Close mobile menu on link click
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => navLinks.classList.remove('open'));
+});
+</script>
+
+</body>
+</html>
