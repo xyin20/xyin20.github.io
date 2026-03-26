@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Xiaoyun Yin — Human Systems Engineering Researcher</title>
+<title>Xiaoyun Yin — Dynamic Interaction Science for Human-AI Systems</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -102,7 +102,7 @@
   }
   .hero h1 em { font-style: italic; color: var(--accent); }
   .hero-sub {
-    font-size: 1.1rem; color: var(--ink-light); max-width: 560px;
+    font-size: 1.1rem; color: var(--ink-light); max-width: 620px;
     line-height: 1.75; margin-top: 1.5rem;
     opacity: 0; animation: fadeUp 0.6s 0.5s forwards;
   }
@@ -133,6 +133,48 @@
   .section h2 {
     font-family: var(--serif); font-size: 2rem; font-weight: 700;
     letter-spacing: -0.02em; margin-bottom: 1.5rem;
+  }
+
+  /* ── VISION STATEMENT ── */
+  .vision-block {
+    background: var(--bg-alt); border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0; padding: 2rem 2.2rem;
+    margin-bottom: 2.5rem; line-height: 1.8;
+  }
+  .vision-block p {
+    font-size: 0.95rem; color: var(--ink-light); margin-bottom: 1rem;
+  }
+  .vision-block p:last-child { margin-bottom: 0; }
+  .vision-block strong { color: var(--ink); }
+  .vision-highlight {
+    display: inline-block; background: var(--accent-bg); color: var(--accent);
+    padding: 0.1em 0.5em; border-radius: 4px; font-weight: 600;
+    font-family: var(--mono); font-size: 0.82rem; letter-spacing: 0.03em;
+  }
+
+  /* ── EVIDENCE CARDS ── */
+  .evidence-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem;
+    margin-top: 1.5rem;
+  }
+  .evidence-card {
+    background: var(--bg); border: 1px solid var(--border-light);
+    border-radius: 10px; padding: 1.5rem; position: relative;
+    transition: border-color 0.3s, transform 0.2s;
+  }
+  .evidence-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .evidence-card .ev-label {
+    font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem;
+  }
+  .evidence-card h4 {
+    font-family: var(--serif); font-size: 1.05rem; font-weight: 600;
+    margin-bottom: 0.5rem; line-height: 1.35;
+  }
+  .evidence-card p { font-size: 0.85rem; color: var(--ink-light); line-height: 1.6; }
+  .evidence-card .ev-stat {
+    font-family: var(--mono); font-size: 1.6rem; font-weight: 500;
+    color: var(--accent); margin-bottom: 0.3rem;
   }
 
   /* ── RESEARCH ── */
@@ -382,6 +424,7 @@
     .news-item { grid-template-columns: 1fr; }
     .news-date { margin-bottom: -0.3rem; }
     .admin-panel { padding: 1.5rem; margin: 20px 0; }
+    .vision-block { padding: 1.5rem; }
   }
 </style>
 </head>
@@ -396,6 +439,7 @@
     </button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about" class="active">About</a></li>
+      <li><a href="#vision">Vision</a></li>
       <li><a href="#research">Research</a></li>
       <li><a href="#publications">Publications</a></li>
       <li><a href="#experience">Experience</a></li>
@@ -409,14 +453,15 @@
 <!-- HERO -->
 <header class="hero" id="about">
   <div>
-    <div class="hero-label">Ph.D. Candidate · Arizona State University</div>
+    <div class="hero-label">Research Associate · Arizona State University</div>
     <h1>Xiaoyun Yin</h1>
-    <h1 style="margin-top:-0.15em">Human Systems <em>Engineering</em></h1>
+    <h1 style="margin-top:-0.15em">Dynamic <em>Interaction</em> Science</h1>
     <p class="hero-sub">
-      I study trust dynamics, team coordination, and resilient performance in
-      human-autonomy teaming — particularly in distributed space operations.
-      My work bridges agent-based modeling, neural network approaches, and
-      empirical team research.
+      I study how humans and AI systems interact as dynamic, evolving systems &mdash;
+      not static input-output exchanges. Using information-theoretic and dynamical systems
+      methods validated in military and space operations, I track how trust, coordination,
+      and cognitive states shift in real time across any environment where humans and
+      intelligent systems meet.
     </p>
     <div class="hero-meta">
       <a href="mailto:xiaoyun.yin@asu.edu">
@@ -427,7 +472,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
         Phoenix, AZ
       </span>
-      <a href="https://scholar.google.com" target="_blank" rel="noopener">
+      <a href="https://scholar.google.com/citations?user=anQylsgAAAAJ&hl=en" target="_blank" rel="noopener">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342"/></svg>
         Google Scholar
       </a>
@@ -435,26 +480,82 @@
   </div>
 </header>
 
+<!-- VISION & INDUSTRY -->
+<section class="section" id="vision">
+  <div class="section-label reveal">00 — Vision</div>
+  <h2 class="reveal">Research Vision</h2>
+
+  <div class="vision-block reveal">
+    <p>
+      Today's AI systems are built to be individually intelligent, but they are blind to the dynamics happening around them. Whether it's a person working with an AI copilot, an operator monitoring an autonomous system, or a user navigating a complex digital environment &mdash; the AI cannot sense when the human is confused, losing trust, or about to change strategy. It only reacts to what it's explicitly told.
+    </p>
+    <p>
+      <strong>Our approach changes that.</strong> We treat human-AI interaction as a dynamic system that evolves over time, and we use scientifically validated methods to observe and measure that evolution in real time. This work has been proven through years of military-funded and space operations research. Now we are bringing it to industry.
+    </p>
+  </div>
+
+  <h3 class="reveal" style="font-family:var(--serif);font-size:1.3rem;margin-bottom:1rem;">What Makes Us Different</h3>
+
+  <div class="vision-block reveal" style="border-left-color:var(--border);background:var(--bg);">
+    <p>
+      Leading AI research groups at institutions like MIT and Harvard, publishing at venues like NeurIPS, are now adopting information-theoretic tools such as Shannon entropy to evaluate machine learning models and robotic systems. But they are applying these metrics to <strong>synthetic benchmarks</strong> &mdash; not to real humans interacting in real environments. We have been doing exactly this with <strong>live human data</strong> for years.
+    </p>
+    <p>
+      This matters for two reasons. First, the AI industry faces a growing problem of <span class="vision-highlight">model collapse</span> from training on recycled synthetic data. Ground-truth human interaction data is the antidote. Second, our dynamical systems methods &mdash; entropy, mutual information, transfer entropy, recurrence quantification &mdash; work as true <strong>time-series tools</strong>. They capture how states emerge, shift, and reorganize moment to moment. Current deep learning models recognize patterns in static snapshots; we track how a human's relationship with a system evolves in real time.
+    </p>
+  </div>
+
+  <h3 class="reveal" style="font-family:var(--serif);font-size:1.3rem;margin-bottom:1rem;">Evidence from Validated Studies</h3>
+  <div class="evidence-grid reveal">
+    <div class="evidence-card">
+      <div class="ev-label">Trust Contagion Study</div>
+      <div class="ev-stat">N = 40</div>
+      <h4>Distributed Human-AI Teams</h4>
+      <p>In a multi-site reconnaissance experiment using the CERTT synthetic task environment, we demonstrated that trust and distrust spread dynamically across interconnected human-AI systems &mdash; with distrust proving significantly more contagious than trust.</p>
+    </div>
+    <div class="evidence-card">
+      <div class="ev-label">Space Operations Study</div>
+      <div class="ev-stat">AMI &gt; Frequency</div>
+      <h4>Resilience Measurement</h4>
+      <p>In simulated space missions, our Average Mutual Information (AMI) metric outperformed simple communication frequency as a measure of team influence and system resilience &mdash; capturing reorganization through phases of action, adaptation, and recovery.</p>
+    </div>
+    <div class="evidence-card">
+      <div class="ev-label">Latent State Detection</div>
+      <div class="ev-stat">EEG + HRV</div>
+      <h4>Predicting Human States</h4>
+      <p>Using physiological signals (EEG, heart rate variability), we detect when a person is about to ask a question, experiencing confusion, or shifting cognitive load &mdash; before any observable behavior occurs. This enables AI to adapt proactively.</p>
+    </div>
+  </div>
+</section>
+
 <!-- RESEARCH -->
 <section class="section" id="research">
   <div class="section-label reveal">01 — Research</div>
-  <h2 class="reveal">Research Interests</h2>
+  <h2 class="reveal">Research Areas</h2>
   <div class="interests-grid">
     <div class="interest-card reveal">
-      <h3>Trust in Human-AI Teaming</h3>
-      <p>Modeling how trust and distrust spread dynamically in distributed human-autonomy teams, using recurrent neural networks and entropy-based approaches.</p>
+      <h3>Dynamic Interaction Modeling</h3>
+      <p>Treating human-AI interaction as a complex adaptive system. Using entropy, mutual information, and transfer entropy to observe how interaction states evolve moment to moment in real time.</p>
     </div>
     <div class="interest-card reveal">
-      <h3>Distributed Space Operations</h3>
-      <p>Designing and evaluating scenarios for future space missions where humans and machines must coordinate across communication delays and constrained environments.</p>
+      <h3>Trust Dynamics &amp; Contagion</h3>
+      <p>Modeling how trust and distrust spread dynamically across distributed human-autonomy systems, using information-theoretic metrics and recurrent neural network approaches.</p>
     </div>
     <div class="interest-card reveal">
-      <h3>Agent-Based Modeling</h3>
-      <p>Using simulation to understand emergent coordination patterns in distributed teams, bridging computational models with empirical team cognition research.</p>
+      <h3>Latent Cognitive State Detection</h3>
+      <p>Using physiological signals (EEG, HRV) and dynamical systems analysis to detect hidden cognitive states &mdash; confusion, workload shifts, decision points &mdash; enabling AI to anticipate and adapt before explicit signals.</p>
     </div>
     <div class="interest-card reveal">
-      <h3>Resilient Team Performance</h3>
-      <p>Observing and measuring how teams adapt under perturbation — particularly in high-stakes space-based missions using digital twin technologies.</p>
+      <h3>Resilient System Performance</h3>
+      <p>Observing how humans and systems reorganize under perturbation &mdash; from space-based missions to autonomous operations &mdash; using digital twin technologies and real-time coordination metrics.</p>
+    </div>
+    <div class="interest-card reveal">
+      <h3>Agent-Based &amp; Computational Modeling</h3>
+      <p>Bridging computational simulation with empirical interaction data to understand emergent coordination patterns in distributed human-AI environments.</p>
+    </div>
+    <div class="interest-card reveal">
+      <h3>Theory of Mind for AI</h3>
+      <p>Critically examining how the AI industry measures machine "understanding" of humans, and proposing dynamic, continuous measurement frameworks grounded in real human interaction data.</p>
     </div>
   </div>
 </section>
@@ -464,6 +565,7 @@
   <div class="section-label reveal">02 — Publications</div>
   <h2 class="reveal">Selected Publications</h2>
   <ul class="pub-list">
+    <li class="pub-item reveal"><span class="pub-year">2025</span><div><div class="pub-title">When Researchers Say Mental Model/Theory of Mind of AI, What Are They Really Talking About?</div><div class="pub-authors"><strong>Yin, X.</strong>, Gorman, J. C.</div><div class="pub-venue">NeurIPS 2025 Workshop on Conversational AI Interpretability (ConvInterp)</div><span class="pub-tag">Accepted</span></div></li>
     <li class="pub-item reveal"><span class="pub-year">2025</span><div><div class="pub-title">Observing Resilient Performance in Space-Based Teaming Mission Using Digital Technologies</div><div class="pub-authors"><strong>Yin, X.</strong>, Grimm, D. A. P., Zhou, S., Pisors, J., Yang Teo, A. Z., Lijenstolpe, M., Doost, E. Z., Cooke, N. J., &amp; Gorman, J. C.</div><div class="pub-venue">Applied Ergonomics, 124, 104409</div></div></li>
     <li class="pub-item reveal"><span class="pub-year">2025</span><div><div class="pub-title">Trusting Autonomous Teammates in Human-AI Teams — A Literature Review</div><div class="pub-authors">Duan, W., Flathmann, C., McNeese, N., Scalia, M., Zhang, R., Gorman, J., Freeman, G., Zhou, S., Hauptman, A., &amp; <strong>Yin, X.</strong></div><div class="pub-venue">Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems</div></div></li>
     <li class="pub-item reveal"><span class="pub-year">2024</span><div><div class="pub-title">Distributed Space Team Coordination: An Agent-Based Modeling and Simulation Approach</div><div class="pub-authors"><strong>Yin, X.</strong>, Gorman, J. C.</div><div class="pub-venue">Proceedings of the HFES Annual Meeting</div><span class="pub-tag">In Press</span></div></li>
@@ -491,9 +593,9 @@
   <div class="section-label reveal">04 — Experience</div>
   <h2 class="reveal">Research Experience</h2>
   <ul class="timeline">
-    <li class="tl-item reveal"><div class="tl-dot"></div><div class="tl-date">Aug 2023 — Present</div><div class="tl-title">Graduate Research Assistant — Systems Psychology Lab</div><div class="tl-sub">Supervisor: Jamie Gorman, Ph.D.</div><div class="tl-detail">Studying the spread of trust and distrust in distributed human-autonomy teaming constellations. Responsible for sIRB submissions, multi-institution collaboration, behavioral coding, and dynamic trust analysis using MATLAB.</div></li>
-    <li class="tl-item reveal"><div class="tl-dot"></div><div class="tl-date">Jan 2021 — Present</div><div class="tl-title">Graduate Service Assistant — Ctr. Human, AI &amp; Robot Teaming</div><div class="tl-sub">Supervisor: Nancy Cooke, Ph.D. · AFOSR Space Challenge</div><div class="tl-detail">Identifying space human-machine teaming issues through SME interviews, implementing scenarios in distributed testbeds, identifying cognitive state sensors, and collecting demonstration data.</div></li>
-    <li class="tl-item reveal"><div class="tl-dot"></div><div class="tl-date">Aug 2020 — Aug 2023</div><div class="tl-title">Graduate Service Assistant — DARPA ASIST Project</div><div class="tl-sub">Supervisor: Nancy Cooke, Ph.D.</div><div class="tl-detail">Developed a Minecraft-based testbed for remote urban search and rescue studies, contributed to mental model development through behavioral annotation, and curated long-term accessible research databases.</div></li>
+    <li class="tl-item reveal"><div class="tl-dot"></div><div class="tl-date">Aug 2023 — Present</div><div class="tl-title">Research Associate — Systems Psychology Lab</div><div class="tl-sub">Supervisor: Jamie Gorman, Ph.D.</div><div class="tl-detail">Leading research on the dynamics of trust and coordination in distributed human-AI systems. Applying information-theoretic methods (entropy, AMI, transfer entropy) and dynamical systems analysis to real-time interaction data. Responsible for multi-institution collaboration, sIRB submissions, and dynamic analysis pipelines in MATLAB and Python.</div></li>
+    <li class="tl-item reveal"><div class="tl-dot"></div><div class="tl-date">Jan 2021 — Present</div><div class="tl-title">Research Associate — Ctr. Human, AI &amp; Robot Teaming</div><div class="tl-sub">Supervisor: Nancy Cooke, Ph.D. · AFOSR Space Challenge</div><div class="tl-detail">Designing distributed human-machine interaction scenarios for future space operations. Collecting multi-modal data (communication, physiological, behavioral) and developing resilience metrics using digital twin technologies.</div></li>
+    <li class="tl-item reveal"><div class="tl-dot"></div><div class="tl-date">Aug 2020 — Aug 2023</div><div class="tl-title">Graduate Research Assistant — DARPA ASIST Project</div><div class="tl-sub">Supervisor: Nancy Cooke, Ph.D.</div><div class="tl-detail">Developed a Minecraft-based testbed for human-AI interaction research in urban search and rescue. Contributed to mental model measurement through behavioral annotation and curated long-term research databases.</div></li>
   </ul>
   <h2 class="reveal" style="margin-top:3rem">Teaching</h2>
   <ul class="timeline">
@@ -513,7 +615,7 @@
   <div class="section-label reveal">06 — Notebook</div>
   <h2 class="reveal">Notes &amp; Reflections</h2>
   <p class="reveal" style="color:var(--ink-light);margin-bottom:2rem;max-width:540px;">
-    Notes on papers I'm reading, ideas about human-AI teaming, and reflections from the Ph.D. journey.
+    Notes on papers I'm reading, ideas about dynamic interaction science, and reflections on bridging team science and AI.
   </p>
   <div class="blog-grid" id="notebookGrid"></div>
 </section>
@@ -523,7 +625,7 @@
   <div class="section-label reveal">07 — Contact</div>
   <h2 class="reveal">Get in Touch</h2>
   <p class="reveal" style="color:var(--ink-light);margin-bottom:1.5rem;">
-    I'm on the faculty job market and always happy to discuss research collaborations or opportunities.
+    I'm open to industry partnerships, research collaborations, and opportunities where dynamic interaction science meets real-world AI deployment.
   </p>
   <div class="contact-grid reveal">
     <a href="mailto:xiaoyun.yin@asu.edu" class="contact-item">
@@ -561,8 +663,6 @@
           <input type="password" id="loginPass" placeholder="Enter your password" autocomplete="off">
         </div>
         <button class="admin-btn admin-btn-primary" id="loginBtn">Log In</button>
-        <p style="font-size:0.78rem;color:var(--ink-muted);margin-top:1rem;">
-        </p>
       </div>
     </div>
 
@@ -596,6 +696,7 @@
           <option>PhD Life</option>
           <option>Paper Review</option>
           <option>Conference</option>
+          <option>Industry</option>
           <option>Other</option>
         </select>
       </div>
@@ -621,15 +722,16 @@ function save(k, d) { localStorage.setItem(k, JSON.stringify(d)); }
 // Defaults (only written once, on first visit)
 if (!localStorage.getItem(K.news)) save(K.news, [
   { id:1, date:'Mar 2026', content:'Personal website is live! Excited to share my research and writing here.', isNew:true },
-  { id:2, date:'2025', content:'Paper accepted at <em>Applied Ergonomics</em> — "Observing Resilient Performance in Space-Based Teaming Mission Using Digital Technologies."', isNew:false },
-  { id:3, date:'2025', content:'Paper accepted at <em>CHI 2025</em> — "Trusting Autonomous Teammates in Human-AI Teams."', isNew:false },
-  { id:4, date:'2024', content:'Received Google compute credits ($1,100) for concordia-contest.', isNew:false },
-  { id:5, date:'2024', content:'Two papers accepted at HFES Annual Meeting — agent-based modeling for space teams and entropy-based trust dynamics.', isNew:false },
+  { id:2, date:'2025', content:'Paper accepted at <em>NeurIPS ConvInterp Workshop</em> — "When Researchers Say Mental Model/Theory of Mind of AI, What Are They Really Talking About?"', isNew:true },
+  { id:3, date:'2025', content:'Paper accepted at <em>Applied Ergonomics</em> — "Observing Resilient Performance in Space-Based Teaming Mission Using Digital Technologies."', isNew:false },
+  { id:4, date:'2025', content:'Paper accepted at <em>CHI 2025</em> — "Trusting Autonomous Teammates in Human-AI Teams."', isNew:false },
+  { id:5, date:'2024', content:'Received Google compute credits ($1,100) for concordia-contest.', isNew:false },
+  { id:6, date:'2024', content:'Two papers accepted at HFES Annual Meeting — agent-based modeling for space teams and entropy-based trust dynamics.', isNew:false },
 ]);
 if (!localStorage.getItem(K.posts)) save(K.posts, [
-  { id:1, tag:'Reading Notes', title:'On Measuring Trust as a Dynamic Process', summary:'Reflections on how entropy-based metrics can capture trust fluctuations that static surveys miss.', body:'', date:'' },
-  { id:2, tag:'Research Thoughts', title:'Why Agent-Based Models Matter for Team Science', summary:'When computational models illuminate things that empirical studies alone cannot.', body:'', date:'' },
-  { id:3, tag:'PhD Life', title:'Navigating Interdisciplinary Research', summary:'Notes on working across psychology, engineering, and computer science.', body:'', date:'' },
+  { id:1, tag:'Research Thoughts', title:'Why Dynamic Methods Are Ahead of Current AI Evaluation', summary:'The AI industry uses static benchmarks to test machine understanding. Here\'s why time-series analysis of real human interaction data tells a fundamentally different story.', body:'', date:'' },
+  { id:2, tag:'Reading Notes', title:'On Measuring Trust as a Dynamic Process', summary:'Reflections on how entropy-based metrics capture trust fluctuations that static surveys miss — and why this matters for any system humans interact with.', body:'', date:'' },
+  { id:3, tag:'Industry', title:'From Military Validation to Commercial Application', summary:'How methods validated in defense and space operations can transform how industry builds human-aware AI systems.', body:'', date:'' },
 ]);
 
 // ═══════════════════════════════════
@@ -758,7 +860,17 @@ navLinksEl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLi
 
 // Active section highlighting
 const secs=document.querySelectorAll('.section,.hero'), links=document.querySelectorAll('.nav-links a');
-new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const id=e.target.id;links.forEach(l=>l.classList.remove('active'));const a=document.querySelector('.nav-links a[href="#'+id+'"]');if(a)a.classList.add('active');}});},{rootMargin:'-40% 0px -55% 0px'}).observe&&secs.forEach(s=>{if(s.id)new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));const a=document.querySelector('.nav-links a[href="#'+e.target.id+'"]');if(a)a.classList.add('active');}});},{rootMargin:'-40% 0px -55% 0px'}).observe(s)});
+secs.forEach(s=>{
+  if(s.id) new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(l=>l.classList.remove('active'));
+        const a=document.querySelector('.nav-links a[href="#'+e.target.id+'"]');
+        if(a)a.classList.add('active');
+      }
+    });
+  },{rootMargin:'-40% 0px -55% 0px'}).observe(s);
+});
 
 // Scroll reveal
 document.querySelectorAll('.reveal').forEach(el=>{
